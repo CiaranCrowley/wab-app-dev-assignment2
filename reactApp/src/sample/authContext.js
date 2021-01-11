@@ -15,13 +15,12 @@ const AuthContextProvider = (props) => {
     setAuthToken(data);
   }
 
-  const authenticate = async (userName, password) => {
-    const result = await login(userName, password);
+  const authenticate = async (username, password) => {
+    const result = await login(username, password);
     if (result.token) {
-      
       setToken(result.token)
       setIsAuthenticated(true);
-      setUserName(userName);
+      setUserName(username);
     }
   };
 
