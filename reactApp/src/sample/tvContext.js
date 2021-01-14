@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect, useReducer } from "react";
-import { getTv } from "../api/movie-api";
+import { getTv, addFavouriteShows, addFavouriteActors } from "../api/movie-api";
 
 export const TvContext = createContext(null);
 
@@ -16,6 +16,12 @@ const TvContextProvider = props => {
    const [state, dispatch] = useReducer(reducer, { tv: []});
    const [authenticated, setAuthenticated] = useState(false);
 
+   const addToFavouriteShows = async (username, showId) => {
+      const result = await addFavouriteShows(username, showId);
+      console.log(result.code);
+      return (result.code == 201) ? true : false;
+   }
+
    useEffect(() => {
       getTv().then(result => {
          console.log(result);
@@ -27,7 +33,8 @@ const TvContextProvider = props => {
       <TvContext.Provider
          value={{
             tv: state.tv,
-            setAuthenticated
+            setAuthenticated,
+            addToFavouriteShows,
          }}
       >
          {props.children}

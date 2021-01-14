@@ -64,3 +64,13 @@ export const getTv = () => {
     }
     ).then(res => res.json());
 };
+
+export const addFavouriteShows = (userName, showId) => {
+    return fetch(`/api/users/${userName}/favouriteShows`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'post',
+        body: JSON.stringify({ id: showId })
+    }).then(res => res.json());
+}

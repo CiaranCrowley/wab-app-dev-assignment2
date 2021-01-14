@@ -71,7 +71,27 @@ export const People = () => {
 
 export const Tv = () => {
     const context = useContext(TvContext);
+    const [userName, setUserName] = useState("");
+    const [showId, setShowId] = useState("");
+
+    const addFavouriteShows = () => {
+        context.addToFavouriteShows(userName, showId);
+    };
+
     return <>
+        <h2>Add Favourite Tv Shows</h2>
+        <p>Enter your user name and the ID of a show you wish to add to your favourites list</p>
+
+        <input value={userName} placeholder="userName" onChange={e => {
+            setUserName(e.target.value);
+        }}></input><br />
+
+        <input value={showId} placeholder="Show ID" onChange={e => {
+            setShowId(e.target.value);
+        }}></input><br />
+        <button onClick={addFavouriteShows}>Add to Favourite TV Shows</button>
+        <br />
+
         <h2>TV Data</h2>
         <div>
             {context.tv.map(tv => { return <>{tv.id}, {tv.name}<br /></> })}
