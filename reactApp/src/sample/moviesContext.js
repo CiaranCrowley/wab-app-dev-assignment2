@@ -1,10 +1,17 @@
 import React, { useState, createContext, useEffect, useReducer } from "react";
-import { getMovies } from "../api/movie-api";
+import { getMovies, addFavouriteMovies } from "../api/movie-api";
 
 export const MoviesContext = createContext(null);
 
 const reducer = (state, action) => {
   switch (action.type) {
+    // case "add-favourite":
+    //   return {
+    //     movies: state.movies.map((m) =>
+    //       m.id === action.payload.movie.id ? { ...m, favourite: true} : m
+    //     ),
+    //     movies: [...state.movies],
+    //   };
     case "load":
       return { movies: action.payload.result};
     default:
@@ -15,6 +22,12 @@ const reducer = (state, action) => {
 const MoviesContextProvider = props => {
   const [state, dispatch] = useReducer(reducer, { movies: []});
   const [authenticated, setAuthenticated] = useState(false);
+
+  const addToFavourites = async (username, movieId) => {
+    const result = await addFavouriteMovies(username, movieId);
+    console.log(result.code);
+    return (result.code == 201) ? true: false;
+  }
 
   useEffect(() => {
     getMovies().then(result => {
@@ -27,7 +40,8 @@ const MoviesContextProvider = props => {
     <MoviesContext.Provider
       value={{
         movies: state.movies,
-        setAuthenticated
+        setAuthenticated,
+        addToFavourites,
       }}
     >
       {props.children}

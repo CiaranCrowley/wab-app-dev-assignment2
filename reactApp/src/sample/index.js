@@ -42,7 +42,7 @@ const App = () => {
               <Switch>
                 <Route path="/public" component={PublicPage} />
                 <Route path="/login" component={LoginPage} />
-                <Route path="/signup" component={SignUpPage} />,
+                <Route path="/signup" component={SignUpPage} />
                 <Route exact path="/" component={HomePage} />
                 <PrivateRoute path="/movies" component={Movies} />
                 <PrivateRoute path="/people" component={People} />

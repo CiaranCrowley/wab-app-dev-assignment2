@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState} from 'react';
 import { useContext} from 'react';
+import { useParams } from 'react-router-dom';
 import { MoviesContext } from './moviesContext';
 import { PeopleContext } from './peopleContext';
 import { TvContext } from './tvContext';
@@ -10,10 +11,29 @@ export const PublicPage = () => {
 
  export const Movies = () => {
     const context = useContext(MoviesContext);
+    const [userName, setUserName] = useState("");
+    const [movieId, setMovieId] = useState("");
+
+    const addFavoutiteMovies = () => {
+        context.addToFavourites(userName, movieId);
+     }
     return <>
+        <h2>Add Favourite Movies</h2>
+        <p>Enter your user name and the ID of a movie you wish to add to your favourites list</p>
+
+        <input value={userName} placeholder="userName" onChange={e => {
+            setUserName(e.target.value);
+        }}></input><br />
+
+        <input value={movieId} placeholder="movie ID" onChange={e => {
+            setMovieId(e.target.value);
+        }}></input><br />
+        <button onClick={addFavoutiteMovies}>Add to Favourites</button>
+        <br />
+
         <h2>Movies Data </h2>
         <div>
-            {context.movies.map(movie => { return <>{movie.id},{movie.title}<br /></> })}
+            {context.movies.map(movie => { return <>{movie.id}, {movie.title}<br /></> })}
         </div>
     </>
 }
@@ -23,7 +43,7 @@ export const People = () => {
     return <>
         <h2>People Data</h2>
         <div>
-            {context.people.map(person => { return <>{person.id},{person.name}<br /></> })}
+            {context.people.map(person => { return <>{person.id}, {person.name}<br /></> })}
         </div>
     </>
 }
@@ -33,7 +53,7 @@ export const Tv = () => {
     return <>
         <h2>TV Data</h2>
         <div>
-            {context.tv.map(tv => { return <>{tv.id},{tv.name}<br /></> })}
+            {context.tv.map(tv => { return <>{tv.id}, {tv.name}<br /></> })}
         </div>
     </>
 }
