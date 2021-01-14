@@ -16,7 +16,8 @@ export const PublicPage = () => {
 
     const addFavoutiteMovies = () => {
         context.addToFavourites(userName, movieId);
-     }
+    };
+
     return <>
         <h2>Add Favourite Movies</h2>
         <p>Enter your user name and the ID of a movie you wish to add to your favourites list</p>
@@ -40,7 +41,27 @@ export const PublicPage = () => {
 
 export const People = () => {
     const context = useContext(PeopleContext);
+    const [userName, setUserName] = useState("");
+    const [personId, setPersonId] = useState("");
+
+    const addFavouriteActors = () => {
+        context.addToFavouriteActors(userName, personId);
+    };
+
     return <>
+        <h2>Add Favourite Actors</h2>
+        <p>Enter your user name and the ID of an actor you wish to add to your favourites list</p>
+
+        <input value={userName} placeholder="userName" onChange={e => {
+            setUserName(e.target.value);
+        }}></input><br />
+
+        <input value={personId} placeholder="Actor ID" onChange={e => {
+            setPersonId(e.target.value);
+        }}></input><br />
+        <button onClick={addFavouriteActors}>Add to Favourite Actors</button>
+        <br />
+
         <h2>People Data</h2>
         <div>
             {context.people.map(person => { return <>{person.id}, {person.name}<br /></> })}

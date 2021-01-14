@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect, useReducer } from "react";
-import { getPeople } from "../api/movie-api";
+import { getPeople, addFavouriteActors } from "../api/movie-api";
 
 export const PeopleContext = createContext(null);
 
@@ -16,6 +16,12 @@ const PeopleContextProvider = props => {
    const [state, dispatch] = useReducer(reducer, { people: []});
    const [authenticated, setAuthenticated] = useState(false);
 
+   const addToFavouriteActors = async (username, personId) => {
+      const result = await  addFavouriteActors(username, personId);
+      console.log(result.code);
+      return (result.code == 201) ? true : false;
+   }
+
    useEffect(() => {
       getPeople().then(result => {
          console.log(result);
@@ -27,7 +33,8 @@ const PeopleContextProvider = props => {
       <PeopleContext.Provider
          value={{
             people: state.people,
-            setAuthenticated
+            setAuthenticated,
+            addToFavouriteActors,
          }}
       >
          {props.children}

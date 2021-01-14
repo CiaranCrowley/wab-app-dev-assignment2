@@ -35,7 +35,7 @@ export const addFavouriteMovies = (userName, movieId) => {
         method: 'post',
         body: JSON.stringify({ id: movieId })
     }).then(res => res.json)
-}
+};
 
 export const getPeople = () => {
     return fetch(
@@ -44,6 +44,16 @@ export const getPeople = () => {
         }
     }
     ).then(res => res.json());
+};
+
+export const addFavouriteActors = (userName, personId) => {
+    return fetch(`/api/users/${userName}/favouriteActors`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'post',
+        body: JSON.stringify({ id: personId })
+    }).then(res => res.json())
 };
 
 export const getTv = () => {
