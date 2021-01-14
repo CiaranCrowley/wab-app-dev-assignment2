@@ -35,7 +35,7 @@ export const PublicPage = () => {
         <h2>Movies Data </h2>
         <div>
             {context.movies.map(movie => { return <>{movie.id}, {movie.title}<br /></> })}
-        </div>
+        </div>\
     </>
 }
 

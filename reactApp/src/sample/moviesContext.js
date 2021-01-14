@@ -5,15 +5,10 @@ export const MoviesContext = createContext(null);
 
 const reducer = (state, action) => {
   switch (action.type) {
-    // case "add-favourite":
-    //   return {
-    //     movies: state.movies.map((m) =>
-    //       m.id === action.payload.movie.id ? { ...m, favourite: true} : m
-    //     ),
-    //     movies: [...state.movies],
-    //   };
     case "load":
       return { movies: action.payload.result};
+    case "load-favourites":
+      return { favourites: action.payload.result};
     default:
       return state;
   }
@@ -40,6 +35,7 @@ const MoviesContextProvider = props => {
     <MoviesContext.Provider
       value={{
         movies: state.movies,
+        favourites: state.favourites,
         setAuthenticated,
         addToFavourites,
       }}
