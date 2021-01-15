@@ -48,16 +48,17 @@ mongoDB=YourMongoURL
 seedDb=true
 secret=YourJWTSecret
 ```
-
-
 ## API Design
 Give an overview of your web API design, perhaps similar to the following: 
 
 |  |  GET | POST |
-| -- | -- | -- | -- | -- 
+<br />
 | /api/movies | Gets a list of movies |
+<br />
 | /api/tv/    | Gets a list of TV Shows | 
+<br />
 | /api/people | Gets a short list of Actors |
+<br />
 | /api/users  | Gets a list of users | Allows the registration of users |
 
 ## Security and Authentication
