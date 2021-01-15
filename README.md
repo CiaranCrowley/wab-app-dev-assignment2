@@ -29,6 +29,7 @@ open movies-api:
  +  npm install -save mongoose
  +  npm install --save express-session
  +  npm install --save passport passport-jwt jsonwebtoken bcrypt-nodejs
+ +  npm start
 
 open reactApp:
  +  npm install
